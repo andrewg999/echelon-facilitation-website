@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | Echelon Facilitation</title>
+  <meta name="description" content="Book a 30-minute facilitation fit call or get in touch. Based in Twickenham, UK - working virtually and in-person across the UK and internationally.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo-color.png" alt="Echelon Facilitation">
+      </a>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
+        <li><a href="workshops.html">Workshops</a></li>
+        <li><a href="case-study.html">Case Studies</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html" style="color: var(--teal);">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Book a Discovery Call</a>
+      <button class="nav-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active')" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <a href="about.html">About</a>
+    <a href="how-we-work.html">How We Work</a>
+    <a href="workshops.html">Workshops</a>
+    <a href="case-study.html">Case Studies</a>
+    <a href="resources.html">Resources</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-primary">Book a Discovery Call</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label">Get in Touch</span>
+      <h1>Book a Discovery Call</h1>
+      <p class="lead">30 minutes to explore your challenge, discuss your requirements, and make a plan. No pitch, no pressure - just a conversation.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="contact-grid">
+
+        <!-- FORM -->
+        <div class="contact-form">
+          <h2 style="margin-bottom: 8px;">Tell us about your challenge</h2>
+          <p class="lead" style="margin-bottom: 32px;">We&rsquo;ll design a facilitation approach that delivers clarity, connection, and results.</p>
+
+          <!-- TODO: Replace YOUR_FORM_ID with your Formspree form ID after signing up at https://formspree.io -->
+          <!-- Free tier: 50 submissions/month. Sign up, create a form, get the ID, replace below -->
+          <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+
+            <label for="org">Organisation</label>
+            <input type="text" id="org" name="organisation" placeholder="Your organisation">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+
+            <label for="role">Your Role</label>
+            <select id="role" name="role">
+              <option value="">Select your role</option>
+              <option value="CEO / Managing Director">CEO / Managing Director</option>
+              <option value="Head of People / HR Director">Head of People / HR Director</option>
+              <option value="Strategy Director">Strategy Director</option>
+              <option value="Transformation Lead">Transformation Lead</option>
+              <option value="Programme Director">Programme Director</option>
+              <option value="Board Member">Board Member</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <label for="interest">What are you interested in?</label>
+            <select id="interest" name="interest">
+              <option value="">Select an option</option>
+              <option value="Executive Alignment Sprint">Executive Alignment Sprint</option>
+              <option value="Strategy & Vision Offsite">Strategy &amp; Vision Offsite</option>
+              <option value="Decision-Rights Reset">Decision-Rights Reset</option>
+              <option value="Transformation Alignment">Transformation Alignment Workshop</option>
+              <option value="Problem-Solving & Innovation">Problem-Solving &amp; Innovation Session</option>
+              <option value="Team-Alignment Retreat">Team-Alignment Retreat</option>
+              <option value="Planning & Execution">Planning &amp; Execution Workshop</option>
+              <option value="Leadership & Board Session">Leadership &amp; Board Session</option>
+              <option value="Design Sprint">Design Sprint</option>
+              <option value="Retrospective / Review">Retrospective, Review &amp; Learning Forum</option>
+              <option value="Not sure yet">Not sure yet - I'd like to discuss</option>
+            </select>
+
+            <label for="message">Tell us about your situation</label>
+            <textarea id="message" name="message" placeholder="What's the challenge? What outcome are you looking for?"></textarea>
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; justify-content: center;">Book a 30-min Discovery Call</button>
+          </form>
+        </div>
+
+        <!-- CONTACT INFO -->
+        <div>
+          <div style="background: var(--light); border-radius: 12px; padding: 40px; margin-bottom: 32px;">
+            <h3 style="margin-bottom: 24px;">Get in touch directly</h3>
+            
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+              </div>
+              <div>
+                <h4>Email</h4>
+                <p><a href="mailto:hello@echelonfacilitation.com">hello@echelonfacilitation.com</a></p>
+              </div>
+            </div>
+
+            <div class="contact-info-item">
+              <div class="contact-info-icon">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h4>Location</h4>
+                <p>Twickenham, UK</p>
+                <p style="font-size: 0.8125rem;">Working virtually and in-person across the UK and internationally</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="background: var(--charcoal); color: var(--white); border-radius: 12px; padding: 40px;">
+            <span class="section-label" style="color: var(--teal);">Availability</span>
+            <h3 style="color: var(--white); margin-bottom: 12px;">Now booking Q2 2026</h3>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.9375rem; margin-bottom: 20px;">We typically book 4-6 weeks in advance for full-day sessions. For shorter engagements, we can often accommodate within 2-3 weeks.</p>
+            <p style="color: rgba(255,255,255,0.7); font-size: 0.9375rem;">A 30-minute Discovery Call is the fastest way to check availability and explore whether we&rsquo;re the right fit for your team.</p>
+          </div>
+
+          <div style="margin-top: 32px; padding: 24px; background: var(--teal-light); border-radius: 12px;">
+            <h4 style="color: var(--teal-dark); margin-bottom: 8px;">Our Process</h4>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--teal); color: white; border-radius: 50%; font-size: 0.8125rem; font-weight: 700; flex-shrink: 0;">1</span>
+                <div>
+                  <strong style="font-size: 0.875rem;">Listen</strong>
+                  <p style="font-size: 0.8125rem; color: var(--gray); margin: 0;">Understand your context, challenges, and desired outcomes.</p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--teal); color: white; border-radius: 50%; font-size: 0.8125rem; font-weight: 700; flex-shrink: 0;">2</span>
+                <div>
+                  <strong style="font-size: 0.875rem;">Design</strong>
+                  <p style="font-size: 0.8125rem; color: var(--gray); margin: 0;">Craft a facilitation experience tailored to your goals and team dynamics.</p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--teal); color: white; border-radius: 50%; font-size: 0.8125rem; font-weight: 700; flex-shrink: 0;">3</span>
+                <div>
+                  <strong style="font-size: 0.875rem;">Facilitate</strong>
+                  <p style="font-size: 0.8125rem; color: var(--gray); margin: 0;">Lead structured conversations that build trust, clarity, and consensus.</p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 12px; align-items: flex-start;">
+                <span style="display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--teal); color: white; border-radius: 50%; font-size: 0.8125rem; font-weight: 700; flex-shrink: 0;">4</span>
+                <div>
+                  <strong style="font-size: 0.875rem;">Embed</strong>
+                  <p style="font-size: 0.8125rem; color: var(--gray); margin: 0;">Translate insights into sustained action and accountability.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logo-color.png" alt="Echelon Facilitation" style="height: 36px; margin-bottom: 12px;">
+          <p>High-stakes facilitation for leadership teams who need decisions, not more discussion. Based in Twickenham, UK.</p>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="workshops.html">Executive Alignment Sprint</a></li>
+            <li><a href="workshops.html">Strategy Offsite</a></li>
+            <li><a href="workshops.html">Planning &amp; Execution</a></li>
+            <li><a href="workshops.html">All Workshops</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="how-we-work.html">How We Work</a></li>
+            <li><a href="case-study.html">Case Studies</a></li>
+            <li><a href="resources.html">Resources</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:hello@echelonfacilitation.com">hello@echelonfacilitation.com</a></li>
+            <li><a href="contact.html">Book a Discovery Call</a></li>
+            <li>Twickenham, UK</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Echelon Facilitation. All rights reserved.</span>
+        <span><a href="#" style="margin-right: 16px;">Privacy Policy</a><a href="#">Terms of Service</a></span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => document.querySelector('.mobile-menu').classList.remove('active'));
+    });
+  </script>
+</body>
+</html>

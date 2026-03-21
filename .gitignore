@@ -1,0 +1,16 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+
+# Test files
+index_test.html

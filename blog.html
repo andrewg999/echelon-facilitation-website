@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog | Echelon Facilitation</title>
+  <meta name="description" content="Insights on leadership facilitation, decision-making, and high-stakes workshops from Dr Andrew Greenland.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="assets/logo-color.png" alt="Echelon Facilitation">
+      </a>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="how-we-work.html">How We Work</a></li>
+        <li><a href="workshops.html">Workshops</a></li>
+        <li><a href="case-study.html">Case Studies</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="blog.html" style="color: var(--teal);">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary btn-sm nav-cta">Book a Discovery Call</a>
+      <button class="nav-toggle" onclick="document.querySelector('.mobile-menu').classList.toggle('active')" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <a href="about.html">About</a>
+    <a href="how-we-work.html">How We Work</a>
+    <a href="workshops.html">Workshops</a>
+    <a href="case-study.html">Case Studies</a>
+    <a href="resources.html">Resources</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="btn btn-primary">Book a Discovery Call</a>
+  </div>
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label">Blog</span>
+      <h1>Insights from the facilitation room</h1>
+      <p class="lead">Practical thinking on decisions, leadership workshops, and what actually happens when you put 12 executives in a room with sticky notes.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid">
+
+        <a href="blog/agreeing-to-disagree-executive-team-alignment.html" class="blog-card">
+          <img src="images/blog/header-agreeing-to-disagree-executive-team-alignment.png" alt="The Day a Chief Executive Discovered Their Team Had Been Agreeing to Disagree for Six Months" class="blog-card-image">
+          <div class="blog-card-content">
+            <span class="section-label">facilitation-craft</span>
+            <h3>The Day a Chief Executive Discovered Their Team Had Been Agreeing to Disagree for Six Months</h3>
+            <p>A leadership team thought they had alignment on their digital transformation. They discovered they had been having three different conversations. Here's how we surfaced the real disagreement and turned it into a decision.</p>
+            <div class="blog-card-meta">
+              <span>15 March 2026</span>
+              <span>&bull;</span>
+              <span>5 min read</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-banner">
+    <div class="container">
+      <h2>Want these insights in your inbox?</h2>
+      <p class="lead">Practical articles on facilitation, decision-making, and leadership workshops.</p>
+      <a href="contact.html" class="btn btn-primary btn-lg">Book a Discovery Call</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/logo-color.png" alt="Echelon Facilitation" style="height: 36px; margin-bottom: 12px;">
+          <p>High-stakes facilitation for leadership teams who need decisions, not more discussion. Based in Twickenham, UK.</p>
+        </div>
+        <div>
+          <h4>Services</h4>
+          <ul class="footer-links">
+            <li><a href="workshops.html">Executive Alignment Sprint</a></li>
+            <li><a href="workshops.html">Strategy Offsite</a></li>
+            <li><a href="workshops.html">All Workshops</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="how-we-work.html">How We Work</a></li>
+            <li><a href="case-study.html">Case Studies</a></li>
+            <li><a href="blog.html">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:hello@echelonfacilitation.com">hello@echelonfacilitation.com</a></li>
+            <li><a href="contact.html">Book a Discovery Call</a></li>
+            <li>Twickenham, UK</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; 2026 Echelon Facilitation. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+  <script>
+    document.querySelectorAll('.mobile-menu a').forEach(a => {
+      a.addEventListener('click', () => document.querySelector('.mobile-menu').classList.remove('active'));
+    });
+  </script>
+</body>
+</html>
