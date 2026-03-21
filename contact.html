@@ -59,7 +59,7 @@
           <h2 style="margin-bottom: 8px;">Tell us about your challenge</h2>
           <p class="lead" style="margin-bottom: 32px;">We&rsquo;ll design a facilitation approach that delivers clarity, connection, and results.</p>
 
-          <form action="https://services.leadconnectorhq.com/hooks/Xv0P6pRPl9FynUWuz98r/webhook-trigger/807639e8-32a1-4bca-9415-452b935003da" method="POST">
+          <form id="contact-form">
             <label for="name">Name</label>
             <input type="text" id="name" name="name" placeholder="Your name" required>
 
@@ -219,6 +219,24 @@
   <script>
     document.querySelectorAll('.mobile-menu a').forEach(a => {
       a.addEventListener('click', () => document.querySelector('.mobile-menu').classList.remove('active'));
+    });
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = this.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      var data = new FormData(this);
+      fetch('https://services.leadconnectorhq.com/hooks/Xv0P6pRPl9FynUWuz98r/webhook-trigger/807639e8-32a1-4bca-9415-452b935003da', {
+        method: 'POST',
+        body: data,
+        mode: 'no-cors'
+      }).then(function() {
+        window.location.href = 'thank-you.html';
+      }).catch(function() {
+        window.location.href = 'thank-you.html';
+      });
     });
   </script>
 </body>
