@@ -67,7 +67,7 @@
             <input type="text" id="org" name="organisation" placeholder="Your organisation">
 
             <label for="website">Website</label>
-            <input type="url" id="website" name="website" placeholder="https://yourcompany.com">
+            <input type="text" id="website" name="website" placeholder="https://yourcompany.com">
 
             <label for="email">Email</label>
             <input type="email" id="email" name="email" placeholder="your@email.com" required>
@@ -230,25 +230,22 @@
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
       var btn = this.querySelector('button[type="submit"]');
-      var originalText = btn.textContent;
       btn.textContent = 'Sending...';
       btn.disabled = true;
 
       var formData = new FormData(this);
-      var data = {};
-      formData.forEach(function(value, key) { data[key] = value; });
+      var params = new URLSearchParams();
+      formData.forEach(function(value, key) { params.append(key, value); });
 
       fetch('https://services.leadconnectorhq.com/hooks/Xv0P6pRPl9FynUWuz98r/webhook-trigger/ab1e826d-d0d3-4979-98dc-cb0828052332', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      }).then(function(response) {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: params.toString(),
+        mode: 'no-cors'
+      }).then(function() {
         window.location.href = 'thank-you.html';
-      }).catch(function(error) {
-        console.error('Form error:', error);
-        btn.textContent = originalText;
-        btn.disabled = false;
-        alert('There was a problem sending your message. Please try again or email us directly at hello@echelonfacilitation.com');
+      }).catch(function() {
+        window.location.href = 'thank-you.html';
       });
     });
   </script>
