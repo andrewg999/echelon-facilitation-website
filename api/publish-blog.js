@@ -16,7 +16,7 @@ function githubRequest(method, path, body) {
       path: path,
       method: method,
       headers: {
-        'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`,
+        'Authorization': `Bearer ${(process.env.GITHUB_TOKEN || '').trim()}`,
         'Accept': 'application/vnd.github+json',
         'User-Agent': 'echelon-blog-publisher',
         'X-GitHub-Api-Version': '2022-11-28',
