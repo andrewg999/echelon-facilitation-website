@@ -69,17 +69,18 @@ function extractFirstParagraph(html) {
 function generateBlogPostHTML(article) {
   const title = article.title || 'Untitled Post';
   const slug = article.slug || slugify(title);
-  // Try every possible field name GetAutoSEO might use
-  const content = article.html || article.content || article.body || article.article_html || article.article_content || article.article_body || article.text || article.article || '';
-  const description = article.meta_description || article.description || article.excerpt || article.summary || article.seo_description || extractFirstParagraph(content);
+  // GetAutoSEO confirmed field names: content_html, content_markdown, heroImageUrl, metaDescription, heroImageAlt, infographicImageUrl
+  const content = article.content_html || article.content_markdown || article.html || article.content || article.body || article.article_html || article.article_content || article.article_body || article.text || article.article || '';
+  const description = article.metaDescription || article.meta_description || article.description || article.excerpt || article.summary || article.seo_description || extractFirstParagraph(content);
   const category = article.category || article.tag || article.topic || article.search_term || 'insights';
   const categorySlug = slugify(category);
   const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   const readTime = estimateReadTime(content);
-  const heroImage = article.hero_image || article.featured_image || article.image || article.hero_image_url || article.featured_image_url || article.image_url || article.thumbnail || '';
+  const heroImage = article.heroImageUrl || article.hero_image || article.featured_image || article.image || article.hero_image_url || article.featured_image_url || article.image_url || article.thumbnail || '';
+  const heroAlt = article.heroImageAlt || title;
 
   const heroImageTag = heroImage
-    ? `      <img src="${heroImage}" alt="${title}" class="blog-post-hero-image">\n`
+    ? `      <img src="${heroImage}" alt="${heroAlt.replace(/"/g, '&quot;')}" class="blog-post-hero-image">\n`
     : '';
 
   return `<!DOCTYPE html>
@@ -218,15 +219,16 @@ ${content}
 
 function generateBlogCardHTML(article, slug) {
   const title = article.title || 'Untitled Post';
-  const articleContent = article.html || article.content || article.body || article.article_html || article.article_content || article.article_body || article.text || article.article || '';
-  const description = article.meta_description || article.description || article.excerpt || article.summary || article.seo_description || extractFirstParagraph(articleContent);
+  const articleContent = article.content_html || article.content_markdown || article.html || article.content || article.body || article.article_html || article.article_content || article.article_body || article.text || article.article || '';
+  const description = article.metaDescription || article.meta_description || article.description || article.excerpt || article.summary || article.seo_description || extractFirstParagraph(articleContent);
   const category = article.category || article.tag || article.topic || article.search_term || 'insights';
   const categorySlug = slugify(category);
   const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   const readTime = estimateReadTime(articleContent);
-  const heroImage = article.hero_image || article.featured_image || article.image || article.hero_image_url || article.featured_image_url || article.image_url || article.thumbnail || '';
+  const heroImage = article.heroImageUrl || article.hero_image || article.featured_image || article.image || article.hero_image_url || article.featured_image_url || article.image_url || article.thumbnail || '';
+  const heroAlt = article.heroImageAlt || title;
   const imageTag = heroImage
-    ? `\n          <img src="${heroImage}" alt="${title.replace(/"/g, '&quot;')}" class="blog-card-image">`
+    ? `\n          <img src="${heroImage}" alt="${heroAlt.replace(/"/g, '&quot;')}" class="blog-card-image">`
     : '';
 
   return `
