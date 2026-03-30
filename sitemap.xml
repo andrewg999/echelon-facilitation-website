@@ -78,4 +78,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.echelonfacilitation.com/blog/best-practices-for-echelon-facilitation-a-commanders-guide-to-strategic-alignment.html</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
