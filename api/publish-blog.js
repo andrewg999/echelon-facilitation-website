@@ -1,5 +1,5 @@
 // Vercel Serverless Function: GetAutoSEO Webhook → GitHub → Auto-deploy blog post
-// Receives article from GetAutoSEO, creates HTML file in repo, updates blog.html
+// Uses Git Trees API to make ALL changes in a SINGLE commit (no race conditions)
 
 const https = require('https');
 
@@ -69,15 +69,15 @@ function extractFirstParagraph(html) {
 function generateBlogPostHTML(article) {
   const title = article.title || 'Untitled Post';
   const slug = article.slug || slugify(title);
-  const content = article.html || article.content || article.body || '';
-  const description = article.meta_description || article.description || extractFirstParagraph(content);
-  const category = article.category || article.tag || 'insights';
+  // Try every possible field name GetAutoSEO might use
+  const content = article.html || article.content || article.body || article.article_html || article.article_content || article.article_body || article.text || article.article || '';
+  const description = article.meta_description || article.description || article.excerpt || article.summary || article.seo_description || extractFirstParagraph(content);
+  const category = article.category || article.tag || article.topic || article.search_term || 'insights';
   const categorySlug = slugify(category);
   const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   const readTime = estimateReadTime(content);
-  const heroImage = article.hero_image || article.featured_image || article.image || '';
+  const heroImage = article.hero_image || article.featured_image || article.image || article.hero_image_url || article.featured_image_url || article.image_url || article.thumbnail || '';
 
-  // Build hero image tag if available
   const heroImageTag = heroImage
     ? `      <img src="${heroImage}" alt="${title}" class="blog-post-hero-image">\n`
     : '';
@@ -218,12 +218,13 @@ ${content}
 
 function generateBlogCardHTML(article, slug) {
   const title = article.title || 'Untitled Post';
-  const description = article.meta_description || article.description || extractFirstParagraph(article.html || article.content || article.body || '');
-  const category = article.category || article.tag || 'insights';
+  const articleContent = article.html || article.content || article.body || article.article_html || article.article_content || article.article_body || article.text || article.article || '';
+  const description = article.meta_description || article.description || article.excerpt || article.summary || article.seo_description || extractFirstParagraph(articleContent);
+  const category = article.category || article.tag || article.topic || article.search_term || 'insights';
   const categorySlug = slugify(category);
   const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-  const readTime = estimateReadTime(article.html || article.content || article.body || '');
-  const heroImage = article.hero_image || article.featured_image || article.image || '';
+  const readTime = estimateReadTime(articleContent);
+  const heroImage = article.hero_image || article.featured_image || article.image || article.hero_image_url || article.featured_image_url || article.image_url || article.thumbnail || '';
   const imageTag = heroImage
     ? `\n          <img src="${heroImage}" alt="${title.replace(/"/g, '&quot;')}" class="blog-card-image">`
     : '';
@@ -264,12 +265,18 @@ module.exports = async function handler(req, res) {
   try {
     const article = req.body;
 
-    // Log the incoming payload for debugging
-    console.log('Received article:', JSON.stringify({
-      title: article.title,
-      slug: article.slug,
-      keys: Object.keys(article)
-    }));
+    // Full diagnostic log - shows ALL field names and content lengths
+    const fieldInfo = {};
+    for (const [key, val] of Object.entries(article)) {
+      if (typeof val === 'string') {
+        fieldInfo[key] = `string(${val.length}) "${val.substring(0, 100)}${val.length > 100 ? '...' : ''}"`;
+      } else if (typeof val === 'object' && val !== null) {
+        fieldInfo[key] = `object(keys: ${Object.keys(val).join(', ')})`;
+      } else {
+        fieldInfo[key] = String(val);
+      }
+    }
+    console.log('WEBHOOK PAYLOAD FIELDS:', JSON.stringify(fieldInfo, null, 2));
 
     const title = article.title;
     if (!title) {
@@ -279,94 +286,128 @@ module.exports = async function handler(req, res) {
     const slug = article.slug || slugify(title);
     const blogPostHTML = generateBlogPostHTML(article);
     const blogCardHTML = generateBlogCardHTML(article, slug);
+    const today = new Date().toISOString().split('T')[0];
 
-    // Step 1: Create the blog post file
-    const postPath = `blog/${slug}.html`;
-    const postContent = Buffer.from(blogPostHTML).toString('base64');
+    // === USE GIT TREES API FOR ATOMIC SINGLE COMMIT ===
 
-    const createResult = await githubRequest('PUT',
-      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${postPath}`, {
-      message: `Add blog post: ${title}`,
-      content: postContent,
-      branch: GITHUB_BRANCH
-    });
+    // Step 1: Get the current HEAD commit SHA and tree SHA
+    const refResult = await githubRequest('GET',
+      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/ref/heads/${GITHUB_BRANCH}`);
 
-    if (createResult.status !== 201 && createResult.status !== 200) {
-      console.error('Failed to create blog post:', createResult.data);
-      return res.status(500).json({ error: 'Failed to create blog post file', details: createResult.data });
+    if (refResult.status !== 200) {
+      console.error('Failed to get branch ref:', refResult.data);
+      return res.status(500).json({ error: 'Failed to get branch ref', details: refResult.data });
     }
 
-    // Step 2: Update blog.html to add the new card at the top
+    const headCommitSha = refResult.data.object.sha;
+
+    // Step 2: Get current commit to find its tree
+    const commitResult = await githubRequest('GET',
+      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/commits/${headCommitSha}`);
+
+    const baseTreeSha = commitResult.data.tree.sha;
+
+    // Step 3: Get current blog.html content
     const blogListResult = await githubRequest('GET',
       `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/blog.html?ref=${GITHUB_BRANCH}`);
 
-    if (blogListResult.status !== 200) {
-      console.error('Failed to read blog.html:', blogListResult.data);
-      return res.status(500).json({ error: 'Failed to read blog.html', details: blogListResult.data });
+    let updatedBlogHTML = '';
+    if (blogListResult.status === 200) {
+      const currentBlogHTML = Buffer.from(blogListResult.data.content, 'base64').toString('utf-8');
+      const insertMarker = '<div class="blog-grid">';
+      const insertIndex = currentBlogHTML.indexOf(insertMarker);
+      if (insertIndex !== -1) {
+        updatedBlogHTML = currentBlogHTML.slice(0, insertIndex + insertMarker.length)
+          + '\n' + blogCardHTML
+          + currentBlogHTML.slice(insertIndex + insertMarker.length);
+      }
     }
 
-    const currentBlogHTML = Buffer.from(blogListResult.data.content, 'base64').toString('utf-8');
-    const insertMarker = '<div class="blog-grid">';
-    const insertIndex = currentBlogHTML.indexOf(insertMarker);
-
-    if (insertIndex === -1) {
-      console.error('Could not find blog-grid marker in blog.html');
-      return res.status(500).json({ error: 'Could not find insertion point in blog.html' });
-    }
-
-    const updatedBlogHTML = currentBlogHTML.slice(0, insertIndex + insertMarker.length)
-      + '\n' + blogCardHTML
-      + currentBlogHTML.slice(insertIndex + insertMarker.length);
-
-    const updateResult = await githubRequest('PUT',
-      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/blog.html`, {
-      message: `Add blog card: ${title}`,
-      content: Buffer.from(updatedBlogHTML).toString('base64'),
-      sha: blogListResult.data.sha,
-      branch: GITHUB_BRANCH
-    });
-
-    if (updateResult.status !== 200) {
-      console.error('Failed to update blog.html:', updateResult.data);
-      return res.status(500).json({ error: 'Failed to update blog.html', details: updateResult.data });
-    }
-
-    // Step 3: Update sitemap.xml
+    // Step 4: Get current sitemap.xml content
     const sitemapResult = await githubRequest('GET',
       `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/sitemap.xml?ref=${GITHUB_BRANCH}`);
 
+    let updatedSitemap = '';
     if (sitemapResult.status === 200) {
       const currentSitemap = Buffer.from(sitemapResult.data.content, 'base64').toString('utf-8');
-      const today = new Date().toISOString().split('T')[0];
-      const newSitemapEntry = `  <url>
-    <loc>https://www.echelonfacilitation.com/blog/${slug}.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-</urlset>`;
+      const newEntry = `  <url>\n    <loc>https://www.echelonfacilitation.com/blog/${slug}.html</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n</urlset>`;
+      updatedSitemap = currentSitemap.replace('</urlset>', newEntry);
+    }
 
-      const updatedSitemap = currentSitemap.replace('</urlset>', newSitemapEntry);
+    // Step 5: Create a new tree with ALL file changes at once
+    const treeItems = [
+      {
+        path: `blog/${slug}.html`,
+        mode: '100644',
+        type: 'blob',
+        content: blogPostHTML
+      }
+    ];
 
-      await githubRequest('PUT',
-        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/sitemap.xml`, {
-        message: `Add sitemap entry: ${slug}`,
-        content: Buffer.from(updatedSitemap).toString('base64'),
-        sha: sitemapResult.data.sha,
-        branch: GITHUB_BRANCH
+    if (updatedBlogHTML) {
+      treeItems.push({
+        path: 'blog.html',
+        mode: '100644',
+        type: 'blob',
+        content: updatedBlogHTML
       });
     }
 
-    console.log(`Successfully published: ${slug}`);
+    if (updatedSitemap) {
+      treeItems.push({
+        path: 'sitemap.xml',
+        mode: '100644',
+        type: 'blob',
+        content: updatedSitemap
+      });
+    }
+
+    const treeResult = await githubRequest('POST',
+      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/trees`, {
+      base_tree: baseTreeSha,
+      tree: treeItems
+    });
+
+    if (treeResult.status !== 201) {
+      console.error('Failed to create tree:', treeResult.data);
+      return res.status(500).json({ error: 'Failed to create git tree', details: treeResult.data });
+    }
+
+    // Step 6: Create a new commit pointing to the new tree
+    const newCommitResult = await githubRequest('POST',
+      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/commits`, {
+      message: `Add blog post: ${title}`,
+      tree: treeResult.data.sha,
+      parents: [headCommitSha]
+    });
+
+    if (newCommitResult.status !== 201) {
+      console.error('Failed to create commit:', newCommitResult.data);
+      return res.status(500).json({ error: 'Failed to create commit', details: newCommitResult.data });
+    }
+
+    // Step 7: Update the branch ref to point to the new commit
+    const updateRefResult = await githubRequest('PATCH',
+      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/refs/heads/${GITHUB_BRANCH}`, {
+      sha: newCommitResult.data.sha
+    });
+
+    if (updateRefResult.status !== 200) {
+      console.error('Failed to update ref:', updateRefResult.data);
+      return res.status(500).json({ error: 'Failed to update branch', details: updateRefResult.data });
+    }
+
+    console.log(`Successfully published: ${slug} (atomic commit: ${newCommitResult.data.sha.substring(0, 7)})`);
     return res.status(200).json({
       success: true,
       slug: slug,
       url: `https://www.echelonfacilitation.com/blog/${slug}.html`,
+      commit: newCommitResult.data.sha.substring(0, 7),
       message: `Blog post "${title}" published successfully. Vercel will auto-deploy.`
     });
 
   } catch (error) {
-    console.error('Webhook error:', error);
+    console.error('Webhook error:', error.message, error.stack);
     return res.status(500).json({ error: 'Internal server error', message: error.message });
   }
 };
