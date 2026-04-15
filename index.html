@@ -22,25 +22,34 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["LocalBusiness", "ProfessionalService"],
     "name": "Echelon Facilitation",
-    "description": "High-stakes facilitation for leadership teams who need decisions, not more discussion.",
+    "description": "High-stakes facilitation for leadership teams who need decisions, not more discussion. Strategy offsites, alignment workshops, and executive sessions across the UK.",
     "url": "https://www.echelonfacilitation.com",
     "logo": "https://www.echelonfacilitation.com/assets/logo-color.png",
     "image": "https://www.echelonfacilitation.com/assets/photos/hero-facilitation.jpg",
     "founder": {
       "@type": "Person",
       "name": "Dr Andrew Greenland",
-      "jobTitle": "Founder & Lead Facilitator"
+      "jobTitle": "Founder & Lead Facilitator",
+      "sameAs": "https://www.linkedin.com/in/andrewdgreenland/"
     },
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Twickenham",
+      "addressRegion": "London",
       "addressCountry": "GB"
     },
     "email": "hello@echelonfacilitation.com",
-    "areaServed": ["United Kingdom", "International"],
-    "serviceType": ["Executive Facilitation", "Strategy Workshops", "Leadership Alignment"],
+    "sameAs": [
+      "https://www.linkedin.com/in/andrewdgreenland/"
+    ],
+    "areaServed": [
+      {"@type": "Country", "name": "United Kingdom"},
+      {"@type": "Place", "name": "International"}
+    ],
+    "knowsAbout": ["Executive Facilitation", "Strategy Workshops", "Leadership Alignment", "Team Decision Making", "Strategic Planning"],
+    "serviceType": ["Executive Facilitation", "Strategy Workshops", "Leadership Alignment", "Strategy Offsite Facilitation", "Board Alignment Workshops"],
     "priceRange": "$$$$"
   }
   </script>
