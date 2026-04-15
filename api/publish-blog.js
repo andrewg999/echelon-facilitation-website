@@ -316,12 +316,19 @@ module.exports = async function handler(req, res) {
     let updatedBlogHTML = '';
     if (blogListResult.status === 200) {
       const currentBlogHTML = Buffer.from(blogListResult.data.content, 'base64').toString('utf-8');
-      const insertMarker = '<div class="blog-grid">';
-      const insertIndex = currentBlogHTML.indexOf(insertMarker);
-      if (insertIndex !== -1) {
-        updatedBlogHTML = currentBlogHTML.slice(0, insertIndex + insertMarker.length)
-          + '\n' + blogCardHTML
-          + currentBlogHTML.slice(insertIndex + insertMarker.length);
+      const blogPostLink = `blog/${slug}.html`;
+
+      // DEDUPLICATION: only add blog card if this slug isn't already on the page
+      if (currentBlogHTML.includes(blogPostLink)) {
+        console.log(`DEDUP: Blog card for "${slug}" already exists in blog.html — skipping insertion`);
+      } else {
+        const insertMarker = '<div class="blog-grid">';
+        const insertIndex = currentBlogHTML.indexOf(insertMarker);
+        if (insertIndex !== -1) {
+          updatedBlogHTML = currentBlogHTML.slice(0, insertIndex + insertMarker.length)
+            + '\n' + blogCardHTML
+            + currentBlogHTML.slice(insertIndex + insertMarker.length);
+        }
       }
     }
 
@@ -332,8 +339,15 @@ module.exports = async function handler(req, res) {
     let updatedSitemap = '';
     if (sitemapResult.status === 200) {
       const currentSitemap = Buffer.from(sitemapResult.data.content, 'base64').toString('utf-8');
-      const newEntry = `  <url>\n    <loc>https://www.echelonfacilitation.com/blog/${slug}.html</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n</urlset>`;
-      updatedSitemap = currentSitemap.replace('</urlset>', newEntry);
+      const sitemapUrl = `https://www.echelonfacilitation.com/blog/${slug}.html`;
+
+      // DEDUPLICATION: only add sitemap entry if this URL isn't already present
+      if (currentSitemap.includes(sitemapUrl)) {
+        console.log(`DEDUP: Sitemap entry for "${slug}" already exists — skipping insertion`);
+      } else {
+        const newEntry = `  <url>\n    <loc>${sitemapUrl}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>monthly</changefreq>\n    <priority>0.7</priority>\n  </url>\n</urlset>`;
+        updatedSitemap = currentSitemap.replace('</urlset>', newEntry);
+      }
     }
 
     // Step 5: Create a new tree with ALL file changes at once
