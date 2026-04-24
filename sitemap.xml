@@ -258,4 +258,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://www.echelonfacilitation.com/blog/strategy-offsite-pitfalls-how-to-avoid-executive-alignment-failure.html</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
