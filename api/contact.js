@@ -1,35 +1,93 @@
 const https = require('https');
 
 const LEADCONNECTOR_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/Xv0P6pRPl9FynUWuz98r/webhook-trigger/ab1e826d-d0d3-4979-98dc-cb0828052332';
+const NOTIFICATION_EMAIL = 'hello@echelonfacilitation.com';
 
-function forwardRequest(url, body) {
+function httpPost(options, data) {
   return new Promise((resolve, reject) => {
-    const parsed = new URL(url);
-    const data = body;
-    const options = {
-      hostname: parsed.hostname,
-      path: parsed.pathname + parsed.search,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Content-Length': Buffer.byteLength(data),
-      },
-    };
     const req = https.request(options, (res) => {
       let chunks = [];
       res.on('data', (chunk) => chunks.push(chunk));
       res.on('end', () => {
-        const responseBody = Buffer.concat(chunks).toString();
-        resolve({ status: res.statusCode, body: responseBody });
+        resolve({ status: res.statusCode, body: Buffer.concat(chunks).toString() });
       });
     });
     req.on('error', reject);
-    req.setTimeout(10000, () => {
-      req.destroy(new Error('Request timed out'));
-    });
+    req.setTimeout(10000, () => req.destroy(new Error('Request timed out')));
     req.write(data);
     req.end();
   });
+}
+
+async function forwardToLeadConnector(formData) {
+  const params = new URLSearchParams();
+  Object.entries(formData).forEach(([key, val]) => {
+    if (val) params.append(key, val);
+  });
+  const body = params.toString();
+  const parsed = new URL(LEADCONNECTOR_WEBHOOK);
+  return httpPost({
+    hostname: parsed.hostname,
+    path: parsed.pathname + parsed.search,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Length': Buffer.byteLength(body),
+    },
+  }, body);
+}
+
+async function sendNotificationEmail(formData) {
+  const resendKey = (process.env.RESEND_API_KEY || '').trim();
+  if (!resendKey) {
+    console.log('RESEND_API_KEY not set — skipping email notification');
+    return;
+  }
+
+  const name = formData.name || 'Unknown';
+  const email = formData.email || 'Not provided';
+  const org = formData.organisation || 'Not provided';
+  const phone = formData.phone || 'Not provided';
+  const role = formData.role || 'Not provided';
+  const interest = formData.interest || 'Not provided';
+  const message = formData.message || 'No message';
+  const website = formData.website || 'Not provided';
+
+  const emailBody = JSON.stringify({
+    from: 'Echelon Website <onboarding@resend.dev>',
+    to: [NOTIFICATION_EMAIL],
+    subject: 'New enquiry: ' + name + ' - ' + (org !== 'Not provided' ? org : interest),
+    html: '<h2>New Contact Form Submission</h2>'
+      + '<table style="border-collapse:collapse;width:100%;max-width:600px;">'
+      + '<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;width:130px;">Name</td><td style="padding:8px;border-bottom:1px solid #eee;">' + name + '</td></tr>'
+      + '<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Email</td><td style="padding:8px;border-bottom:1px solid #eee;"><a href="mailto:' + email + '">' + email + '</a></td></tr>'
+      + '<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Phone</td><td style="padding:8px;border-bottom:1px solid #eee;">' + phone + '</td></tr>'
+      + '<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Organisation</td><td style="padding:8px;border-bottom:1px solid #eee;">' + org + '</td></tr>'
+      + '<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Website</td><td style="padding:8px;border-bottom:1px solid #eee;">' + website + '</td></tr>'
+      + '<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Role</td><td style="padding:8px;border-bottom:1px solid #eee;">' + role + '</td></tr>'
+      + '<tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:bold;">Interest</td><td style="padding:8px;border-bottom:1px solid #eee;">' + interest + '</td></tr>'
+      + '</table>'
+      + '<h3 style="margin-top:24px;">Message</h3>'
+      + '<p style="background:#f5f5f5;padding:16px;border-radius:8px;white-space:pre-wrap;">' + message + '</p>'
+      + '<hr style="margin-top:32px;border:none;border-top:1px solid #eee;">'
+      + '<p style="color:#999;font-size:12px;">Submitted via echelonfacilitation.com contact form</p>',
+  });
+
+  try {
+    const result = await httpPost({
+      hostname: 'api.resend.com',
+      path: '/emails',
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + resendKey,
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(emailBody),
+      },
+    }, emailBody);
+    console.log('Resend: ' + result.status + ' - ' + result.body);
+  } catch (err) {
+    console.error('Resend failed:', err.message);
+  }
 }
 
 module.exports = async function handler(req, res) {
@@ -47,40 +105,16 @@ module.exports = async function handler(req, res) {
 
   try {
     const body = req.body;
-    const name = body.name || 'Unknown';
-    const email = body.email || 'No email';
-    const org = body.organisation || '';
-    const role = body.role || '';
-    const interest = body.interest || '';
-    const message = body.message || '';
-    const phone = body.phone || '';
-    const website = body.website || '';
+    console.log('CONTACT FORM: ' + (body.name || '') + ' (' + (body.email || '') + ') - ' + (body.organisation || '') + ' - ' + (body.interest || ''));
 
-    console.log(`CONTACT FORM: ${name} (${email}) - ${org} - ${interest}`);
+    const lcResult = await forwardToLeadConnector(body);
+    console.log('LeadConnector: ' + lcResult.status);
 
-    const params = new URLSearchParams();
-    Object.entries(body).forEach(([key, val]) => {
-      if (val) params.append(key, val);
-    });
+    await sendNotificationEmail(body);
 
-    const result = await forwardRequest(LEADCONNECTOR_WEBHOOK, params.toString());
-
-    if (result.status >= 200 && result.status < 300) {
-      console.log(`LeadConnector OK: ${result.status}`);
-      return res.status(200).json({ success: true, message: 'Form submitted successfully' });
-    } else {
-      console.error(`LeadConnector error: ${result.status} - ${result.body}`);
-      return res.status(200).json({
-        success: true,
-        warning: 'LeadConnector returned non-200 but form data was logged',
-        lcStatus: result.status,
-      });
-    }
+    return res.status(200).json({ success: true, message: 'Form submitted successfully' });
   } catch (error) {
     console.error('Contact form error:', error.message);
-    return res.status(200).json({
-      success: true,
-      warning: 'LeadConnector unreachable but form data was logged to Vercel',
-    });
+    return res.status(200).json({ success: true, warning: 'Form data logged to Vercel' });
   }
 };
