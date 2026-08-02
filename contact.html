@@ -99,6 +99,8 @@
             <label for="interest">What are you interested in?</label>
             <select id="interest" name="interest">
               <option value="">Select an option</option>
+              <option value="AI Design Sprint">AI Design Sprint</option>
+              <option value="Strategy Sprint">The Strategy Sprint</option>
               <option value="Executive Alignment Sprint">Executive Alignment Sprint</option>
               <option value="Strategy & Vision Offsite">Strategy &amp; Vision Offsite</option>
               <option value="Decision-Rights Reset">Decision-Rights Reset</option>
@@ -240,22 +242,40 @@
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
       var btn = this.querySelector('button[type="submit"]');
+      var originalText = btn.textContent;
       btn.textContent = 'Sending...';
       btn.disabled = true;
 
       var formData = new FormData(this);
-      var params = new URLSearchParams();
-      formData.forEach(function(value, key) { params.append(key, value); });
+      var data = {};
+      formData.forEach(function(value, key) { data[key] = value; });
 
-      fetch('https://services.leadconnectorhq.com/hooks/Xv0P6pRPl9FynUWuz98r/webhook-trigger/ab1e826d-d0d3-4979-98dc-cb0828052332', {
+      fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params.toString(),
-        mode: 'no-cors'
-      }).then(function() {
-        window.location.href = 'thank-you.html';
-      }).catch(function() {
-        window.location.href = 'thank-you.html';
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function(response) {
+        return response.json();
+      }).then(function(result) {
+        if (result.success) {
+          window.location.href = 'thank-you.html';
+        } else {
+          btn.textContent = 'Something went wrong - please email us directly';
+          btn.style.background = '#dc2626';
+          setTimeout(function() {
+            btn.textContent = originalText;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 5000);
+        }
+      }).catch(function(error) {
+        btn.textContent = 'Connection error - please email us directly';
+        btn.style.background = '#dc2626';
+        setTimeout(function() {
+          btn.textContent = originalText;
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 5000);
       });
     });
   </script>
