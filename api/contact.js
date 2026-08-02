@@ -1,7 +1,7 @@
 const https = require('https');
 
 const LEADCONNECTOR_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/Xv0P6pRPl9FynUWuz98r/webhook-trigger/ab1e826d-d0d3-4979-98dc-cb0828052332';
-const NOTIFICATION_EMAIL = 'andrewdgreenland@gmail.com';
+const NOTIFICATION_EMAIL = 'hello@echelonfacilitation.com';
 
 function httpPost(options, data) {
   return new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ async function sendNotificationEmail(formData) {
   const website = formData.website || 'Not provided';
 
   const emailBody = JSON.stringify({
-    from: 'Echelon Website <onboarding@resend.dev>',
+    from: 'Echelon Website <hello@echelonfacilitation.com>',
     to: [NOTIFICATION_EMAIL],
     subject: 'New enquiry: ' + name + ' - ' + (org !== 'Not provided' ? org : interest),
     html: '<h2>New Contact Form Submission</h2>'
