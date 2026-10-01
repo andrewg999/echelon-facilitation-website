@@ -4,9 +4,9 @@
   <script src="/consent.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You | Echelon Facilitation</title>
-  <meta name="description" content="Thank you for getting in touch. We'll be back to you within 24 hours.">
-  <link rel="canonical" href="https://www.echelonfacilitation.com/thank-you.html">
+  <title>Cookies | Echelon Facilitation</title>
+  <meta name="description" content="How echelonfacilitation.com uses cookies: Google Analytics only, and only if you accept. What is set, how long it lasts, and how to change your choice.">
+  <link rel="canonical" href="https://www.echelonfacilitation.com/cookies.html">
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
@@ -44,21 +44,41 @@
     <a href="contact.html" class="btn btn-primary">Book a Discovery Call</a>
   </div>
 
-  <section class="section" style="min-height: 60vh; display: flex; align-items: center; padding-top: 140px;">
-    <div class="container" style="max-width: 640px; text-align: center;">
-      <div style="width: 80px; height: 80px; background: rgba(0,173,181,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px;">
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-          <polyline points="22 4 12 14.01 9 11.01"/>
-        </svg>
+  <section class="page-hero">
+    <div class="container">
+      <span class="section-label">Cookies</span>
+      <h1>Cookies</h1>
+      <p class="lead">This site uses one kind of optional cookie: Google Analytics. Nothing is set until you accept, and the site works exactly the same if you don't.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width: 760px;">
+      <h2>What is used, and why</h2>
+      <p>If you click <strong>Accept</strong>, the site loads Google Analytics to see which pages people find useful and how they arrive. That information is used to decide what to write and what to improve. It is not used for advertising, it is not combined with other data about you, and it is not sold.</p>
+      <p>If you click <strong>Reject</strong>, or ignore the banner, Google Analytics is never loaded and no request is sent to Google.</p>
+
+      <h2 style="margin-top: 32px;">What is set if you accept</h2>
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; min-width: 520px;">
+          <thead><tr style="text-align: left; border-bottom: 2px solid var(--charcoal);"><th style="padding: 10px;">Name</th><th style="padding: 10px;">Set by</th><th style="padding: 10px;">Purpose</th><th style="padding: 10px;">Lasts</th></tr></thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--lighter);"><td style="padding: 10px;">_ga</td><td style="padding: 10px;">Google Analytics</td><td style="padding: 10px;">Distinguishes one visitor from another</td><td style="padding: 10px;">2 years</td></tr>
+            <tr><td style="padding: 10px;">_ga_&lt;ID&gt;</td><td style="padding: 10px;">Google Analytics</td><td style="padding: 10px;">Keeps track of the current visit</td><td style="padding: 10px;">2 years</td></tr>
+          </tbody>
+        </table>
       </div>
-      <h1 style="margin-bottom: 16px;">Thank you for getting in touch</h1>
-      <p style="font-size: 1.125rem; color: var(--gray); line-height: 1.8; margin-bottom: 12px;">Your message has been received. We will review your enquiry and get back to you within 24 hours.</p>
-      <p style="font-size: 1rem; color: var(--gray); line-height: 1.8; margin-bottom: 40px;">In the meantime, feel free to explore how we work or browse our workshop formats.</p>
-      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="how-we-work.html" class="btn btn-primary btn-lg">How We Work</a>
-        <a href="workshops.html" class="btn btn-secondary btn-lg">View Workshops</a>
-      </div>
+
+      <h2 style="margin-top: 32px;">How your choice is remembered</h2>
+      <p>Your choice is stored in your browser's local storage under the name <code>echelon-consent-v1</code>, so the banner doesn't appear on every page. It holds only 'granted' or 'denied' and the date. It is strictly necessary for the banner to work, so it does not need consent. You will be asked again after twelve months.</p>
+
+      <h2 style="margin-top: 32px;">Changing your mind</h2>
+      <p>Use the <strong>Cookie settings</strong> link at the bottom of any page, or this button:</p>
+      <p><button type="button" class="btn btn-primary" onclick="window.echelonConsent && window.echelonConsent.open()">Change my cookie choice</button></p>
+      <p>If you withdraw consent, Google Analytics stops loading from your next page view. To remove cookies already set, clear them in your browser's settings.</p>
+
+      <h2 style="margin-top: 32px;">Questions</h2>
+      <p>Email <a href="mailto:hello@echelonfacilitation.com">hello@echelonfacilitation.com</a>. Google explains how it handles Analytics data in its <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">partner sites policy</a>.</p>
     </div>
   </section>
 
@@ -84,7 +104,7 @@
             <li><a href="about.html">About</a></li>
             <li><a href="how-we-work.html">How We Work</a></li>
             <li><a href="case-study.html">Case Studies</a></li>
-            <li><a href="blog.html">Blog</a></li>
+            <li><a href="resources.html">Resources</a></li>
           </ul>
         </div>
         <div>
