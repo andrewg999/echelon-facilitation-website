@@ -1376,6 +1376,29 @@ p { margin-bottom: 1rem; }
   margin: 16px 0 24px 24px;
 }
 
+.blog-post-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0 32px;
+  font-size: 0.9375rem;
+}
+.blog-post-content th,
+.blog-post-content td {
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--lighter);
+  min-width: 140px;
+}
+.blog-post-content thead th {
+  background: var(--light);
+  color: var(--charcoal);
+  font-weight: 600;
+}
+@media (max-width: 768px) {
+  .blog-post-content table { display: block; overflow-x: auto; }
+}
+
 .blog-post-content li {
   font-size: 1.0625rem;
   line-height: 1.8;
