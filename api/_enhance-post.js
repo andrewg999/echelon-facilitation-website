@@ -56,8 +56,9 @@ function extractFaqs(content) {
   const faqHeading = /<h2[^>]*>(?:(?!<\/h2>)[\s\S])*?(frequently asked|faqs?\b)(?:(?!<\/h2>)[\s\S])*?<\/h2>/i.exec(content);
   if (!faqHeading) return [];
   let section = content.slice(faqHeading.index + faqHeading[0].length);
-  const nextH2 = section.search(/<h2[\s>]/);
-  if (nextH2 !== -1) section = section.slice(0, nextH2);
+  // The FAQ ends at the next h2 or at the author box, whichever comes first.
+  const stops = [section.search(/<h2[\s>]/), section.indexOf('<div class="author-box"')].filter(i => i !== -1);
+  if (stops.length) section = section.slice(0, Math.min(...stops));
   const faqs = [];
   const parts = section.split(/<h3[^>]*>/).slice(1);
   for (const part of parts) {
@@ -195,4 +196,4 @@ function enhancePost(html, opts = {}) {
   return page.replace('</head>', headTags + '\n</head>');
 }
 
-module.exports = { enhancePost, normaliseHeadings, parseDisplayDate };
+module.exports = { enhancePost, extractFaqs, normaliseHeadings, parseDisplayDate };
