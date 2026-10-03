@@ -111,7 +111,8 @@ function generateBlogPostHTML(article) {
         <li><a href="../about.html">About</a></li>
         <li><a href="../how-we-work.html">How We Work</a></li>
         <li><a href="../workshops.html">Workshops</a></li>
-        <li><a href="../case-study.html">Case Studies</a></li>
+        <li><a href="../pricing.html">Pricing</a></li>
+        <li><a href="../case-study.html">Track Record</a></li>
         <li><a href="../resources.html">Resources</a></li>
         <li><a href="../blog.html" style="color: var(--teal);">Blog</a></li>
         <li><a href="../contact.html">Contact</a></li>
@@ -126,7 +127,8 @@ function generateBlogPostHTML(article) {
     <a href="../about.html">About</a>
     <a href="../how-we-work.html">How We Work</a>
     <a href="../workshops.html">Workshops</a>
-    <a href="../case-study.html">Case Studies</a>
+    <a href="../pricing.html">Pricing</a>
+    <a href="../case-study.html">Track Record</a>
     <a href="../resources.html">Resources</a>
     <a href="../blog.html">Blog</a>
     <a href="../contact.html">Contact</a>
@@ -183,7 +185,7 @@ ${content}
           <ul class="footer-links">
             <li><a href="../about.html">About</a></li>
             <li><a href="../how-we-work.html">How We Work</a></li>
-            <li><a href="../case-study.html">Case Studies</a></li>
+            <li><a href="../case-study.html">Track Record</a></li>
             <li><a href="../blog.html">Blog</a></li>
           </ul>
         </div>

@@ -193,7 +193,12 @@ p { margin-bottom: 1rem; }
 }
 .mobile-menu .btn { margin-top: 24px; text-align: center; justify-content: center; }
 
-@media (max-width: 768px) {
+.nav-links a { white-space: nowrap; }
+@media (max-width: 1280px) {
+  .nav-links { gap: 20px; }
+}
+/* Eight menu links plus the logo and button need about 1180px; below that, use the menu button. */
+@media (max-width: 1180px) {
   .nav-links { display: none; }
   .nav-cta { display: none; }
   .nav-toggle { display: flex; }
