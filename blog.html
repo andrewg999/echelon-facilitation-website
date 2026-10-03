@@ -10,6 +10,61 @@
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json" id="page-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://www.echelonfacilitation.com/blog.html#webpage",
+      "url": "https://www.echelonfacilitation.com/blog.html",
+      "name": "Blog | Echelon Facilitation",
+      "description": "Insights on leadership facilitation, decision-making, and high-stakes workshops from Dr Andrew Greenland.",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.echelonfacilitation.com/#website",
+        "url": "https://www.echelonfacilitation.com",
+        "name": "Echelon Facilitation",
+        "publisher": {
+          "@id": "https://www.echelonfacilitation.com/#organization"
+        }
+      },
+      "about": {
+        "@id": "https://www.echelonfacilitation.com/#organization"
+      },
+      "mainEntity": {
+        "@type": "Blog",
+        "@id": "https://www.echelonfacilitation.com/blog.html#blog",
+        "name": "Echelon Facilitation Blog",
+        "publisher": {
+          "@id": "https://www.echelonfacilitation.com/#organization"
+        },
+        "author": {
+          "@id": "https://www.echelonfacilitation.com/about.html#andrew-greenland"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.echelonfacilitation.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://www.echelonfacilitation.com/blog.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 
@@ -54,6 +109,7 @@
 
   <section class="section">
     <div class="container">
+      <h2 class="sr-only">Latest articles</h2>
       <div class="blog-grid">
 
         <a href="blog/how-to-manage-stakeholder-expectations-a-framework-for-alignment.html" class="blog-card">
@@ -784,34 +840,6 @@
           </div>
         </a>
 
-        <a href="blog/best-practices-for-echelon-facilitation-a-commanders-guide-to-strategic-alignment-2.html" class="blog-card">
-          <img src="https://getautoseo.com/storage/hero_images/article_880411_1774819318.jpg" alt="Best Practices for Echelon Facilitation: A Commander’s Guide to Strategic Alignment" class="blog-card-image">
-          <div class="blog-card-content">
-            <span class="section-label">insights</span>
-            <h3>Best Practices for Echelon Facilitation: A Commander’s Guide to Strategic Alignment</h3>
-            <p>Learn the best practices for Echelon Facilitation to eliminate executive friction and drive strategic alignment. A commander's guide to unshakeable clarity.</p>
-            <div class="blog-card-meta">
-              <span>16 April 2026</span>
-              <span>&bull;</span>
-              <span>16 min read</span>
-            </div>
-          </div>
-        </a>
-
-        <a href="blog/optimising-the-echelon-facilitation-process-for-maximum-strategic-impact-3.html" class="blog-card">
-          <img src="https://getautoseo.com/storage/hero_images/article_880412_1774866327.jpg" alt="Optimising the Echelon Facilitation Process for Maximum Strategic Impact" class="blog-card-image">
-          <div class="blog-card-content">
-            <span class="section-label">insights</span>
-            <h3>Optimising the Echelon Facilitation Process for Maximum Strategic Impact</h3>
-            <p>Learn how to improve Echelon Facilitation and turn unproductive offsites into strategic victories. Master high-stakes decision-making with our battle-tested ...</p>
-            <div class="blog-card-meta">
-              <span>16 April 2026</span>
-              <span>&bull;</span>
-              <span>11 min read</span>
-            </div>
-          </div>
-        </a>
-
         <a href="blog/2026-strategic-planning-a-tactical-template-for-executive-alignment.html" class="blog-card">
           <img src="https://getautoseo.com/storage/hero_images/article_866946_1776273570.jpg" alt="2026 Strategic Planning: A Tactical Template for Executive Alignment" class="blog-card-image">
           <div class="blog-card-content">
@@ -1195,7 +1223,7 @@
           <p>High-stakes facilitation for leadership teams who need decisions, not more discussion. Based in Twickenham, UK.</p>
         </div>
         <div>
-          <h4>Services</h4>
+          <p class="footer-heading">Services</p>
           <ul class="footer-links">
             <li><a href="workshops.html">Executive Alignment Sprint</a></li>
             <li><a href="workshops.html">Strategy Offsite</a></li>
@@ -1203,7 +1231,7 @@
           </ul>
         </div>
         <div>
-          <h4>Company</h4>
+          <p class="footer-heading">Company</p>
           <ul class="footer-links">
             <li><a href="about.html">About</a></li>
             <li><a href="how-we-work.html">How We Work</a></li>
@@ -1212,7 +1240,7 @@
           </ul>
         </div>
         <div>
-          <h4>Contact</h4>
+          <p class="footer-heading">Contact</p>
           <ul class="footer-links">
             <li><a href="mailto:hello@echelonfacilitation.com">hello@echelonfacilitation.com</a></li>
             <li><a href="contact.html">Book a Discovery Call</a></li>

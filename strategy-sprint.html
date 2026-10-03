@@ -86,7 +86,7 @@
       border-radius: 12px;
       padding: 24px;
     }
-    .deliverable-card h4 {
+    .deliverable-card h4, .deliverable-card .h4 {
       margin-bottom: 8px;
       display: flex;
       align-items: center;
@@ -136,7 +136,7 @@
       border-radius: 10px;
       border-left: 4px solid var(--teal);
     }
-    .principle-card h4 { margin-bottom: 6px; font-size: 1rem; }
+    .principle-card h4, .principle-card .h4 { margin-bottom: 6px; font-size: 1rem; }
     .principle-card p { font-size: 0.9rem; color: var(--secondary); margin: 0; }
 
     @media (max-width: 768px) {
@@ -144,6 +144,79 @@
       .sprint-step-number { width: 48px; height: 48px; font-size: 1.1rem; }
     }
   </style>
+  <script type="application/ld+json" id="page-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.echelonfacilitation.com/strategy-sprint.html#webpage",
+      "url": "https://www.echelonfacilitation.com/strategy-sprint.html",
+      "name": "The Strategy Sprint | Echelon Facilitation",
+      "description": "A structured strategy workshop that takes your leadership team from vision to owned roadmap in 1-2 days. Silent-first exercises, time-boxed activities, and a designated Decider ensure real decisions get made.",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.echelonfacilitation.com/#website",
+        "url": "https://www.echelonfacilitation.com",
+        "name": "Echelon Facilitation",
+        "publisher": {
+          "@id": "https://www.echelonfacilitation.com/#organization"
+        }
+      },
+      "about": {
+        "@id": "https://www.echelonfacilitation.com/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://www.echelonfacilitation.com/strategy-sprint.html#service"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.echelonfacilitation.com/strategy-sprint.html#service",
+      "name": "Strategy Sprint",
+      "serviceType": "Facilitated leadership workshop",
+      "description": "A structured strategy workshop that takes your leadership team from vision to owned roadmap in 1-2 days. Silent-first exercises, time-boxed activities, and a designated Decider ensure real decisions get made.",
+      "provider": {
+        "@id": "https://www.echelonfacilitation.com/#organization"
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "United Kingdom"
+        },
+        {
+          "@type": "Place",
+          "name": "International"
+        }
+      ],
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Executive and leadership teams"
+      },
+      "url": "https://www.echelonfacilitation.com/strategy-sprint.html",
+      "sameAs": "https://www.echelonfacilitation.com/workshops.html#strategy-sprint"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.echelonfacilitation.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "The Strategy Sprint",
+          "item": "https://www.echelonfacilitation.com/strategy-sprint.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 
@@ -334,27 +407,27 @@
       </div>
       <div class="principles-grid">
         <div class="principle-card">
-          <h4>Silent Before Social</h4>
+          <h3 class="h4">Silent Before Social</h3>
           <p>Individual thinking before group discussion prevents anchoring bias and produces bolder ideas.</p>
         </div>
         <div class="principle-card">
-          <h4>Decider Authority</h4>
+          <h3 class="h4">Decider Authority</h3>
           <p>One person has final say at every decision point. No endless consensus-seeking. No deferred decisions.</p>
         </div>
         <div class="principle-card">
-          <h4>Time-Boxed Everything</h4>
+          <h3 class="h4">Time-Boxed Everything</h3>
           <p>Every exercise has strict time limits. Energy stays high. Drift is impossible.</p>
         </div>
         <div class="principle-card">
-          <h4>Written Artefacts</h4>
+          <h3 class="h4">Written Artefacts</h3>
           <p>Everything is documented as it happens. Nothing is lost. Accountability is visible from the start.</p>
         </div>
         <div class="principle-card">
-          <h4>Milestones as Celebrations</h4>
+          <h3 class="h4">Milestones as Celebrations</h3>
           <p>Natural break points to acknowledge progress and re-energise the team before the next phase.</p>
         </div>
         <div class="principle-card">
-          <h4>Broad Time Horizons</h4>
+          <h3 class="h4">Broad Time Horizons</h3>
           <p>Granular 12-month plans never survive contact with reality. Three horizons give flexibility with clarity.</p>
         </div>
       </div>
@@ -408,45 +481,45 @@
       </div>
       <div class="deliverables-grid">
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
             Written Long-Term Goal
-          </h4>
+          </h3>
           <p>A specific, agreed goal anchoring the entire strategy &mdash; visible and owned.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
             Success Metrics
-          </h4>
+          </h3>
           <p>3-5 measurable indicators with named owners, tracked from day one.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
             Strategy Concept Cards
-          </h4>
+          </h3>
           <p>All concepts created during the sprint &mdash; selected and unselected &mdash; for future reference.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
             Decision Log
-          </h4>
+          </h3>
           <p>Every decision documented with rationale, owner, and timeline &mdash; the Echelon standard.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
             Visual Roadmap
-          </h4>
+          </h3>
           <p>Three-horizon timeline with named owners and clear next steps for each initiative.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
             30-Day Action Plan
-          </h4>
+          </h3>
           <p>Immediate commitments extracted from the roadmap with deadlines and accountability.</p>
         </div>
       </div>
@@ -465,21 +538,21 @@
           <div class="icon-circle" style="margin: 0 auto 12px;">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
-          <h4>The Decider</h4>
+          <h3 class="h4">The Decider</h3>
           <p style="font-size: 0.9rem; color: var(--secondary);">CEO or most senior decision-maker. Has final authority at every decision point.</p>
         </div>
         <div style="text-align: center; padding: 24px;">
           <div class="icon-circle" style="margin: 0 auto 12px;">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h4>The Team</h4>
+          <h3 class="h4">The Team</h3>
           <p style="font-size: 0.9rem; color: var(--secondary);">4-11 leaders with strategic perspective and execution authority. Cross-functional is ideal.</p>
         </div>
         <div style="text-align: center; padding: 24px;">
           <div class="icon-circle" style="margin: 0 auto 12px;">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
           </div>
-          <h4>The Facilitator</h4>
+          <h3 class="h4">The Facilitator</h3>
           <p style="font-size: 0.9rem; color: var(--secondary);">Echelon&rsquo;s neutral facilitator. Guides the process, protects the space, ensures decisions land.</p>
         </div>
       </div>
@@ -537,7 +610,7 @@
           <p>High-stakes facilitation for leadership teams who need decisions, not more discussion. Based in Twickenham, UK.</p>
         </div>
         <div>
-          <h4>Services</h4>
+          <p class="footer-heading">Services</p>
           <ul class="footer-links">
             <li><a href="workshops.html">Executive Alignment Sprint</a></li>
             <li><a href="strategy-sprint.html">Strategy Sprint</a></li>
@@ -546,7 +619,7 @@
           </ul>
         </div>
         <div>
-          <h4>Company</h4>
+          <p class="footer-heading">Company</p>
           <ul class="footer-links">
             <li><a href="about.html">About</a></li>
             <li><a href="how-we-work.html">How We Work</a></li>
@@ -556,7 +629,7 @@
           </ul>
         </div>
         <div>
-          <h4>Contact</h4>
+          <p class="footer-heading">Contact</p>
           <ul class="footer-links">
             <li><a href="mailto:hello@echelonfacilitation.com">hello@echelonfacilitation.com</a></li>
             <li><a href="contact.html">Book a Discovery Call</a></li>

@@ -2,6 +2,7 @@
 // Uses Git Trees API to make ALL changes in a SINGLE commit (no race conditions)
 
 const https = require('https');
+const { enhancePost } = require('./_enhance-post');
 
 const GITHUB_OWNER = 'andrewg999';
 const GITHUB_REPO = 'echelon-facilitation-website';
@@ -170,7 +171,7 @@ ${content}
           <p>High-stakes facilitation for leadership teams who need decisions, not more discussion. Based in Twickenham, UK.</p>
         </div>
         <div>
-          <h4>Services</h4>
+          <p class="footer-heading">Services</p>
           <ul class="footer-links">
             <li><a href="../workshops.html">Executive Alignment Sprint</a></li>
             <li><a href="../workshops.html">Strategy Offsite</a></li>
@@ -178,7 +179,7 @@ ${content}
           </ul>
         </div>
         <div>
-          <h4>Company</h4>
+          <p class="footer-heading">Company</p>
           <ul class="footer-links">
             <li><a href="../about.html">About</a></li>
             <li><a href="../how-we-work.html">How We Work</a></li>
@@ -187,7 +188,7 @@ ${content}
           </ul>
         </div>
         <div>
-          <h4>Contact</h4>
+          <p class="footer-heading">Contact</p>
           <ul class="footer-links">
             <li><a href="mailto:hello@echelonfacilitation.com">hello@echelonfacilitation.com</a></li>
             <li><a href="../contact.html">Book a Discovery Call</a></li>
@@ -279,7 +280,7 @@ module.exports = async function handler(req, res) {
     }
 
     const slug = article.slug || slugify(title);
-    const blogPostHTML = generateBlogPostHTML(article);
+    const blogPostHTML = enhancePost(generateBlogPostHTML(article), { datePublished: new Date().toISOString().split('T')[0] });
     const blogCardHTML = generateBlogCardHTML(article, slug);
     const today = new Date().toISOString().split('T')[0];
 

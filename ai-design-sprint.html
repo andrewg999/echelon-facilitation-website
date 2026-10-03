@@ -90,7 +90,7 @@
       border-radius: 12px;
       padding: 24px;
     }
-    .deliverable-card h4 {
+    .deliverable-card h4, .deliverable-card .h4 {
       margin-bottom: 8px;
       display: flex;
       align-items: center;
@@ -140,7 +140,7 @@
       border-radius: 10px;
       border-left: 4px solid var(--teal);
     }
-    .principle-card h4 { margin-bottom: 6px; font-size: 1rem; }
+    .principle-card h4, .principle-card .h4 { margin-bottom: 6px; font-size: 1rem; }
     .principle-card p { font-size: 0.9rem; color: var(--secondary); margin: 0; }
 
     @media (max-width: 768px) {
@@ -148,6 +148,79 @@
       .sprint-step-number { width: 48px; height: 48px; font-size: 1.1rem; }
     }
   </style>
+  <script type="application/ld+json" id="page-schema">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.echelonfacilitation.com/ai-design-sprint.html#webpage",
+      "url": "https://www.echelonfacilitation.com/ai-design-sprint.html",
+      "name": "The AI Design Sprint | Echelon Facilitation",
+      "description": "A structured 1-2 day sprint that takes your leadership team from AI uncertainty to a prioritised, governed, owned AI roadmap. No vendors, no hype — just decisions.",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.echelonfacilitation.com/#website",
+        "url": "https://www.echelonfacilitation.com",
+        "name": "Echelon Facilitation",
+        "publisher": {
+          "@id": "https://www.echelonfacilitation.com/#organization"
+        }
+      },
+      "about": {
+        "@id": "https://www.echelonfacilitation.com/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://www.echelonfacilitation.com/ai-design-sprint.html#service"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.echelonfacilitation.com/ai-design-sprint.html#service",
+      "name": "AI Design Sprint",
+      "serviceType": "Facilitated leadership workshop",
+      "description": "A structured 1-2 day sprint that takes your leadership team from AI uncertainty to a prioritised, governed, owned AI roadmap. No vendors, no hype — just decisions.",
+      "provider": {
+        "@id": "https://www.echelonfacilitation.com/#organization"
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "United Kingdom"
+        },
+        {
+          "@type": "Place",
+          "name": "International"
+        }
+      ],
+      "audience": {
+        "@type": "BusinessAudience",
+        "audienceType": "Executive and leadership teams"
+      },
+      "url": "https://www.echelonfacilitation.com/ai-design-sprint.html",
+      "sameAs": "https://www.echelonfacilitation.com/workshops.html#ai-design-sprint"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.echelonfacilitation.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "The AI Design Sprint",
+          "item": "https://www.echelonfacilitation.com/ai-design-sprint.html"
+        }
+      ]
+    }
+  ]
+}
+  </script>
 </head>
 <body>
 
@@ -306,27 +379,27 @@
       </div>
       <div class="principles-grid">
         <div class="principle-card">
-          <h4>No Vendors in the Room</h4>
+          <h3 class="h4">No Vendors in the Room</h3>
           <p>Every use case is evaluated against your business priorities, not a platform&rsquo;s feature list.</p>
         </div>
         <div class="principle-card">
-          <h4>Silent Before Social</h4>
+          <h3 class="h4">Silent Before Social</h3>
           <p>The best AI ideas aren&rsquo;t coming from the loudest voice &mdash; they&rsquo;re from the operations lead who&rsquo;s watched the same process fail 200 times.</p>
         </div>
         <div class="principle-card">
-          <h4>Business Outcomes First</h4>
+          <h3 class="h4">Business Outcomes First</h3>
           <p>Use cases are framed as measurable outcomes, not technology features. This prevents solution-in-search-of-a-problem thinking.</p>
         </div>
         <div class="principle-card">
-          <h4>Governance Built In</h4>
+          <h3 class="h4">Governance Built In</h3>
           <p>Most organisations build governance after something goes wrong. You build it on Day 2, before a single model is deployed.</p>
         </div>
         <div class="principle-card">
-          <h4>Time-Boxed Everything</h4>
+          <h3 class="h4">Time-Boxed Everything</h3>
           <p>Every exercise has strict time limits. No drifting into &ldquo;but what about blockchain&rdquo; tangents.</p>
         </div>
         <div class="principle-card">
-          <h4>Decisions, Not Discussions</h4>
+          <h3 class="h4">Decisions, Not Discussions</h3>
           <p>Every sprint ends with a documented decision log, named owners, and a 90-day plan. No working groups.</p>
         </div>
       </div>
@@ -400,45 +473,45 @@
       </div>
       <div class="deliverables-grid">
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
             AI Use-Case Portfolio
-          </h4>
+          </h3>
           <p>Every idea generated, evaluated, and ranked by business impact and implementation feasibility.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             AI Governance Framework
-          </h4>
+          </h3>
           <p>A practical one-page framework covering risk appetite, data governance, ethical guardrails, and accountability.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
             90-Day Execution Roadmap
-          </h4>
+          </h3>
           <p>Top 3-5 use cases with named owners, success metrics, resource requirements, and decision checkpoints.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
             Executive AI Fluency
-          </h4>
+          </h3>
           <p>Your team leaves with shared vocabulary and the ability to evaluate AI proposals critically.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
             Decision Log
-          </h4>
+          </h3>
           <p>Every choice documented with rationale, owner, and timeline &mdash; the Echelon standard.</p>
         </div>
         <div class="deliverable-card">
-          <h4>
+          <h3 class="h4">
             <svg class="icon-sm" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
             Board-Ready Narrative
-          </h4>
+          </h3>
           <p>A structured summary you can take directly to your board or investors.</p>
         </div>
       </div>
@@ -457,21 +530,21 @@
           <div class="icon-circle" style="margin: 0 auto 12px;">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           </div>
-          <h4>The Decider</h4>
+          <h3 class="h4">The Decider</h3>
           <p style="font-size: 0.9rem; color: var(--secondary);">CEO or most senior decision-maker. Has final authority at every decision point. Must be present for the full sprint.</p>
         </div>
         <div style="text-align: center; padding: 24px;">
           <div class="icon-circle" style="margin: 0 auto 12px;">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
-          <h4>The Team</h4>
+          <h3 class="h4">The Team</h3>
           <p style="font-size: 0.9rem; color: var(--secondary);">5-14 leaders across functions &mdash; strategy, operations, technology, finance, HR. Cross-functional perspective is essential for AI prioritisation.</p>
         </div>
         <div style="text-align: center; padding: 24px;">
           <div class="icon-circle" style="margin: 0 auto 12px;">
             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
           </div>
-          <h4>The Facilitator</h4>
+          <h3 class="h4">The Facilitator</h3>
           <p style="font-size: 0.9rem; color: var(--secondary);">Echelon&rsquo;s neutral facilitator. Guides the process, prevents vendor bias, ensures decisions land.</p>
         </div>
       </div>
@@ -529,7 +602,7 @@
           <p>High-stakes facilitation for leadership teams who need decisions, not more discussion. Based in Twickenham, UK.</p>
         </div>
         <div>
-          <h4>Services</h4>
+          <p class="footer-heading">Services</p>
           <ul class="footer-links">
             <li><a href="workshops.html">Executive Alignment Sprint</a></li>
             <li><a href="strategy-sprint.html">Strategy Sprint</a></li>
@@ -538,7 +611,7 @@
           </ul>
         </div>
         <div>
-          <h4>Company</h4>
+          <p class="footer-heading">Company</p>
           <ul class="footer-links">
             <li><a href="about.html">About</a></li>
             <li><a href="how-we-work.html">How We Work</a></li>
@@ -548,7 +621,7 @@
           </ul>
         </div>
         <div>
-          <h4>Contact</h4>
+          <p class="footer-heading">Contact</p>
           <ul class="footer-links">
             <li><a href="mailto:hello@echelonfacilitation.com">hello@echelonfacilitation.com</a></li>
             <li><a href="contact.html">Book a Discovery Call</a></li>

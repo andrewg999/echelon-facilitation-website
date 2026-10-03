@@ -1,5 +1,17 @@
 {
   "rewrites": [
     { "source": "/api/:path*", "destination": "/api/:path*" }
+  ],
+  "redirects": [
+    {
+      "source": "/blog/best-practices-for-echelon-facilitation-a-commanders-guide-to-strategic-alignment-2.html",
+      "destination": "/blog/best-practices-for-echelon-facilitation-a-commanders-guide-to-strategic-alignment.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/optimising-the-echelon-facilitation-process-for-maximum-strategic-impact-3.html",
+      "destination": "/blog/optimising-the-echelon-facilitation-process-for-maximum-strategic-impact.html",
+      "permanent": true
+    }
   ]
 }
