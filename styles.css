@@ -1438,3 +1438,23 @@ p { margin-bottom: 1rem; }
     padding: 100px 0 40px;
   }
 }
+
+/* Guides block */
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+.guide-card {
+  display: block;
+  background: var(--white);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 12px;
+  padding: 24px;
+  color: inherit;
+  transition: all var(--transition);
+}
+.guide-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.guide-card h3 { font-size: 1.125rem; margin-bottom: 8px; }
+.guide-card p { font-size: 0.9375rem; color: var(--gray); margin-bottom: 12px; }
+.guide-link { font-size: 0.875rem; font-weight: 600; color: var(--teal-dark); }

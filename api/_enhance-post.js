@@ -57,7 +57,7 @@ function extractFaqs(content) {
   if (!faqHeading) return [];
   let section = content.slice(faqHeading.index + faqHeading[0].length);
   // The FAQ ends at the next h2 or at the author box, whichever comes first.
-  const stops = [section.search(/<h2[\s>]/), section.indexOf('<div class="author-box"')].filter(i => i !== -1);
+  const stops = [section.search(/<h2[\s>]/), section.search(/<(div|aside) class="author-box"/)].filter(i => i !== -1);
   if (stops.length) section = section.slice(0, Math.min(...stops));
   const faqs = [];
   const parts = section.split(/<h3[^>]*>/).slice(1);
@@ -71,7 +71,26 @@ function extractFaqs(content) {
   return faqs.length >= 2 ? faqs : [];
 }
 
+// The author bio is supporting content, not part of the article: mark it up as an <aside>.
+function asideAuthorBox(html) {
+  const start = html.indexOf('<div class="author-box"');
+  if (start === -1) return html;
+  const tagRe = /<\/?div\b[^>]*>/g;
+  tagRe.lastIndex = start;
+  let depth = 0, m;
+  while ((m = tagRe.exec(html))) {
+    depth += m[0][1] === '/' ? -1 : 1;
+    if (depth === 0) {
+      const openEnd = html.indexOf('>', start) + 1;
+      return html.slice(0, start) + '<aside' + html.slice(start + 4, openEnd)
+        + html.slice(openEnd, m.index) + '</aside>' + html.slice(m.index + m[0].length);
+    }
+  }
+  return html;
+}
+
 function enhancePost(html, opts = {}) {
+  html = asideAuthorBox(html);
   if (html.includes('id="post-schema"')) return html; // already enhanced
 
   const contentStart = html.indexOf('<div class="blog-post-content">');
@@ -196,4 +215,4 @@ function enhancePost(html, opts = {}) {
   return page.replace('</head>', headTags + '\n</head>');
 }
 
-module.exports = { enhancePost, extractFaqs, normaliseHeadings, parseDisplayDate };
+module.exports = { enhancePost, asideAuthorBox, extractFaqs, normaliseHeadings, parseDisplayDate };
