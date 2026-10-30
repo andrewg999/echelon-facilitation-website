@@ -1,16 +1,44 @@
 {
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/:path*" }
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    }
   ],
   "redirects": [
     {
       "source": "/blog/best-practices-for-echelon-facilitation-a-commanders-guide-to-strategic-alignment-2.html",
-      "destination": "/blog/best-practices-for-echelon-facilitation-a-commanders-guide-to-strategic-alignment.html",
+      "destination": "/how-we-work.html",
       "permanent": true
     },
     {
       "source": "/blog/optimising-the-echelon-facilitation-process-for-maximum-strategic-impact-3.html",
-      "destination": "/blog/optimising-the-echelon-facilitation-process-for-maximum-strategic-impact.html",
+      "destination": "/how-we-work.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/10-critical-tips-for-echelon-facilitation-success-in-2026.html",
+      "destination": "/blog/high-stakes-workshop-facilitation-leaders-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/best-practices-for-echelon-facilitation-a-commanders-guide-to-strategic-alignment.html",
+      "destination": "/how-we-work.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/echelon-facilitation-strategies-for-growth-driving-executive-clarity-and-decisive-action.html",
+      "destination": "/blog/high-stakes-workshop-facilitation-leaders-guide.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/optimising-the-echelon-facilitation-process-for-maximum-strategic-impact.html",
+      "destination": "/how-we-work.html",
+      "permanent": true
+    },
+    {
+      "source": "/blog/the-complete-guide-to-echelon-facilitation-driving-mission-success-through-strategic-alignment.html",
+      "destination": "/blog/high-stakes-workshop-facilitation-leaders-guide.html",
       "permanent": true
     }
   ]
